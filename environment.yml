@@ -1,0 +1,11 @@
+name: spelling-bee
+dependencies:
+  - python=3.8
+  - nltk
+  - spacy
+  - transformers
+  - numpy
+  - scikit-learn
+  - pandas
+  - jupyter
+  - ipython
