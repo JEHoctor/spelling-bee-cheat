@@ -1,4 +1,4 @@
-# spelling-bee 🐝📚
+# spelling-bee 👑🐝📚
 
 This code is for cheating at the [NYT Spelling Bee puzzle](https://www.nytimes.com/puzzles/spelling-bee). It very simplly takes a word list and filters it according to the rules of the puzzle.
 
