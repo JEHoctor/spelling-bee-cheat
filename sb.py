@@ -39,12 +39,17 @@ class FindWords:
             dictionary = cls.dictionary
 
         letter_set = set(letters)
-        return [
+        words_found = [
             word for word in dictionary
             if len(word) >= min_len
             and center_letter in word
             and set(word.lower()) <= letter_set
         ]
+
+        # This can be necessary due to duplicates in the dictionary list.
+        words_found = sorted(set(words_found))
+
+        return words_found
 
 
 find_words = FindWords.find_words
