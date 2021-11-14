@@ -18,7 +18,7 @@ class FindWords:
         corpora = [brown, gutenberg, inaugural, reuters, webtext, words]
         dictionary = set()
         for corpus in corpora:
-            dictionary |= set(corpus.words())
+            dictionary |= set(word.lower() for word in corpus.words())
         cls.dictionary = sorted(dictionary)
 
     @classmethod
@@ -49,16 +49,15 @@ class FindWords:
                 cls.load_default_dictionary()
             dictionary = cls.dictionary
 
-        letter_set = set(letters)
+        letter_set = set(letters.lower())
+        center_letter = center_letter.lower()
+
         words_found = [
             word for word in dictionary
             if len(word) >= min_len
             and center_letter in word
-            and set(word.lower()) <= letter_set
+            and set(word) <= letter_set
         ]
-
-        # This can be necessary due to duplicates in the dictionary list.
-        words_found = sorted(set(words_found))
 
         return words_found
 
