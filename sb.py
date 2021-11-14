@@ -2,6 +2,7 @@ from typing import List
 
 from nltk.corpus import words
 
+
 class FindWords:
     """
     Class for caching the nltk word list for use with the find_words function
@@ -44,5 +45,6 @@ class FindWords:
             and center_letter in word
             and set(word.lower()) <= letter_set
         ]
+
 
 find_words = FindWords.find_words
