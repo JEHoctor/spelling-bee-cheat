@@ -1,6 +1,6 @@
 from typing import List
 
-from nltk.corpus import words
+from nltk.corpus import brown, gutenberg, inaugural, reuters, webtext, words
 
 
 class FindWords:
@@ -9,6 +9,17 @@ class FindWords:
     """
 
     dictionary: List[str] = None
+
+    @classmethod
+    def load_default_dictionary(cls):
+        """
+        Load word lists from several NLTK corpora and combine to create a large word list
+        """
+        corpora = [brown, gutenberg, inaugural, reuters, webtext, words]
+        dictionary = set()
+        for corpus in corpora:
+            dictionary |= set(corpus.words())
+        cls.dictionary = sorted(dictionary)
 
     @classmethod
     def find_words(
@@ -35,7 +46,7 @@ class FindWords:
         """
         if dictionary is None:
             if cls.dictionary is None:
-                cls.dictionary = words.words()
+                cls.load_default_dictionary()
             dictionary = cls.dictionary
 
         letter_set = set(letters)
