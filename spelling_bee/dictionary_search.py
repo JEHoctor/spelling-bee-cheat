@@ -3,9 +3,9 @@ from typing import List
 from nltk.corpus import brown, gutenberg, inaugural, reuters, webtext, words
 
 
-class FindWords:
+class DictionarySearch:
     """
-    Class for caching the nltk word list for use with the find_words function
+    Class for caching the nltk word list for use with the dictionary_search function
     """
 
     dictionary: List[str] = None
@@ -22,13 +22,13 @@ class FindWords:
         cls.dictionary = sorted(dictionary)
 
     @classmethod
-    def find_words(
-            cls,
-            letters: str,
-            center_letter: str,
-            dictionary: List[str] = None,
-            min_len: int = 4
-            ) -> List[str]:
+    def dictionary_search(
+        cls,
+        letters: str,
+        center_letter: str,
+        dictionary: List[str] = None,
+        min_len: int = 4,
+    ) -> List[str]:
         """
         Filter a list of words to those that satisfy the rules of the spelling bee game:
          - contains only letters from the 7 given
@@ -53,7 +53,8 @@ class FindWords:
         center_letter = center_letter.lower()
 
         words_found = [
-            word for word in dictionary
+            word
+            for word in dictionary
             if len(word) >= min_len
             and center_letter in word
             and set(word) <= letter_set
@@ -62,4 +63,4 @@ class FindWords:
         return words_found
 
 
-find_words = FindWords.find_words
+dictionary_search = DictionarySearch.dictionary_search
