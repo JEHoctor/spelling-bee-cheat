@@ -1,9 +1,14 @@
-.PHONY: init lint test format
+.PHONY: init clean update lint test format
 
 
 init:
-	python -m venv venv
+	python3.9 -m venv venv
 	(source venv/bin/activate; pip install -e .)
+
+clean:
+	rm -rf venv/
+
+update: clean init
 
 lint:
 	flake8 spelling_bee
