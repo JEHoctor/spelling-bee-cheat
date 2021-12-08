@@ -6,6 +6,7 @@ setup(
     packages=["spelling_bee"],
     install_requires=[
         "black",
+        "beautifulsoup4",
         "flake8",
         "jupyter",
         "nltk",
