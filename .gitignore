@@ -1,3 +1,6 @@
+# Folder for storing pickled puzzle data
+/puzzle_archive/
+
 # Vim
 # Swap
 [._]*.s[a-v][a-z]

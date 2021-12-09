@@ -1,4 +1,4 @@
-.PHONY: init clean update lint test format
+.PHONY: init clean update lint test format scrape
 
 
 init:
@@ -19,3 +19,6 @@ test: lint
 format:
 	black spelling_bee/ tests/ scripts/
 	isort spelling_bee/ tests/ scripts/
+
+scrape:
+	(source venv/bin/activate; scrape.py -d puzzle_archive/)
