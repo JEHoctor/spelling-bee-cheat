@@ -4,6 +4,7 @@
 init:
 	python3.9 -m venv venv
 	(source venv/bin/activate; pip install -e .)
+	(source venv/bin/activate; pip install -r dev-requirements.txt)
 
 clean:
 	rm -rf venv/

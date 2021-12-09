@@ -1,0 +1,4 @@
+# Add any extra dependencies here that are only relevant during development. I
+# use `git update-index --assume-unchanged dev-requirements.txt` to assure
+# changes to this file aren't accidentally committed. I introduced this file to
+# install a library that vim looks for, powerline-status.
