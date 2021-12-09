@@ -7,7 +7,7 @@ import spelling_bee
 
 
 @click.command()
-@click.option("-d", "--dest", type=click.Path(exists=True))
+@click.option("-d", "--dest", type=click.Path(exists=True), default=".")
 def scrape(dest: str):
     """
     Download today's spelling bee puzzle from the NYT website and save it in a
@@ -21,7 +21,7 @@ def scrape(dest: str):
     pdat = spelling_bee.PuzzleData.fetch_today()
     dest_path = Path(dest) / f"puzzle_{pdat.date}.pkl"
     if dest_path.exists():
-        raise RuntimeError("File already exists: {dest_path}")
+        raise click.ClickException(f"File already exists: {dest_path}")
     with dest_path.open("wb") as f:
         pickle.dump(pdat, f)
 
