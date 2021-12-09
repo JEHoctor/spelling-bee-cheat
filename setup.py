@@ -8,6 +8,7 @@ setup(
         "black",
         "beautifulsoup4",
         "flake8",
+        "isort",
         "jupyter",
         "nltk",
         "numpy",

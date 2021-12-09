@@ -11,10 +11,11 @@ clean:
 update: clean init
 
 lint:
-	flake8 spelling_bee
+	flake8 spelling_bee/ tests/ scripts/
 
 test: lint
 	pytest -vv tests/spelling_bee
 
 format:
-	black spelling_bee
+	black spelling_bee/ tests/ scripts/
+	isort spelling_bee/ tests/ scripts/

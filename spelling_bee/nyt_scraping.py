@@ -2,12 +2,11 @@ import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import List, Union, Tuple
+from typing import List, Tuple, Union
 
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup, Tag
-
 
 Pathlike = Union[str, Path]
 

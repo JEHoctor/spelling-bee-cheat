@@ -1,7 +1,7 @@
-from spelling_bee import dictionary_search, DictionarySearch
+from spelling_bee import DictionarySearch, dictionary_search
+
 
 class TestDictionarySearch:
-
     def test_dictionary_search(self):
         words = dictionary_search(
             letters="abc",
