@@ -7,6 +7,7 @@ setup(
     install_requires=[
         "black",
         "beautifulsoup4",
+        "click",
         "flake8",
         "isort",
         "jupyter",
@@ -18,5 +19,8 @@ setup(
         "seaborn",
         "spacy",
         "transformers",
+    ],
+    scripts=[
+        "scripts/scrape.py",
     ],
 )
