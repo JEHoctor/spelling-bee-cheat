@@ -99,11 +99,11 @@ class DictionaryDataFrameCache:
     @classmethod
     def _load_dictionary_dataframe(cls) -> pd.DataFrame:
         df = pd.DataFrame(index=load_default_dictionary())
-    
+
         for corpus_name, corpus in CORPORA.items():
             df[corpus_name] = False
             df[corpus_name][list(corpus.words())] = True
-    
+
         return df
 
 
