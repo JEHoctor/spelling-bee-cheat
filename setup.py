@@ -21,6 +21,7 @@ setup(
         "transformers",
     ],
     scripts=[
+        "scripts/markov.py",
         "scripts/scrape.py",
     ],
 )
