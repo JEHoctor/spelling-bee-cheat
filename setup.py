@@ -11,6 +11,7 @@ setup(
         "flake8",
         "isort",
         "jupyter",
+        "more-itertools",
         "nltk",
         "numpy",
         "pandas",

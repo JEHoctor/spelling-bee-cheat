@@ -5,6 +5,8 @@ from string import ascii_lowercase
 import numpy as np
 import pandas as pd
 
+from more_itertools import chunked
+
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
@@ -65,7 +67,7 @@ class MarkovSearch:
 
         self.pipeline.fit(self.dataset["word"], self.dataset["exists"])
 
-    def markov_search(self, pdat: PuzzleData) -> tp.List[str]:
+    def markov_search(self, pdat: PuzzleData, batch_size: int = 100_000) -> tp.List[str]:
         """
         """
         valid_letters = pdat.valid_letters
@@ -78,8 +80,16 @@ class MarkovSearch:
                 if center_letter in letters:
                     words.append("".join(letters))
 
-        words_df = pd.DataFrame({
+        dfuncs = []
+        batch_iterable = tqdm(
+            list(chunked(words, batch_size)),
+            desc=f"Scoring words (batches of {batch_size})"
+        )
+        for words_chunk in batch_iterable:
+            dfuncs.extend(self.pipeline.decision_function(words_chunk))
+
+        self.words_df = pd.DataFrame({
             "word": words,
-            "dfunc": self.pipeline.decision_function(words)
+            "dfunc": dfuncs,
         })
-        return words_df.sort_values("dfunc", ascending=False)["word"].to_list()
+        return self.words_df.sort_values("dfunc", ascending=False)["word"].to_list()
