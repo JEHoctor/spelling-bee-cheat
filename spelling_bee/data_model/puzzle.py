@@ -4,6 +4,10 @@ from pydantic import BaseModel
 
 
 class Puzzle(BaseModel):
+    """
+    Representation of the JSON puzzle data used by NYT.
+    """
+
     expiration: int
     displayWeekday: str
     displayDate: str
