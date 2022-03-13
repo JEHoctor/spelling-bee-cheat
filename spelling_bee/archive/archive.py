@@ -54,8 +54,11 @@ class Archive:
             puzzle: puzzle to save
         """
         out_path = self.path_from_iso8601(puzzle.printDate)
-        with out_path.open("w") as f:
-            f.write(puzzle.json())
+        if not out_path.exists():
+            # Avoid overwriting old data because of the missing expiration
+            # value in the puzzle from the previous day.
+            with out_path.open("w") as f:
+                f.write(puzzle.json())
 
     def today_and_yesterday_puzzles(self) -> TodayAndYesterdayPuzzles:
         """
