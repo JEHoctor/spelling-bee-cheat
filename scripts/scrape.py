@@ -1,29 +1,27 @@
-import pickle
-from pathlib import Path
-
 import click
 
 import spelling_bee
 
 
 @click.command()
-@click.option("-d", "--dest", type=click.Path(exists=True), default=".")
-def scrape(dest: str):
+@click.option("-d", "--archive-dir",
+              type=click.Path(exists=True, file_okay=False, writable=True, readable=True),
+              default=spelling_bee.folders.PUZZLE_ARCHIVE_DIR)
+def scrape(archive_dir: str):
     """
-    Download today's spelling bee puzzle from the NYT website and save it in a
-    pickle file. The file name will contain today's date in the file name. It
-    will look like puzzle_YYYY-MM-DD.pkl. You can control the destination
-    directory with a flag.
+    Download today's and yesterday's spelling bee puzzles from the NYT website
+    and save them in JSON files. The file names will contain the publication
+    date. They will look like YYYY-MM-DD.json. You can control the archive
+    directory with a flag, but the default is the puzzle_archive/ directory in
+    the code repo.
 
     Args:
-        dest: folder in which to save the result
+        archive_dir: folder in which to save the results
     """
-    pdat = spelling_bee.PuzzleData.fetch_today()
-    dest_path = Path(dest) / f"puzzle_{pdat.date}.pkl"
-    if dest_path.exists():
-        raise click.ClickException(f"File already exists: {dest_path}")
-    with dest_path.open("wb") as f:
-        pickle.dump(pdat, f)
+    archive = spelling_bee.archive.Archive(archive_dir)
+    tayp = archive.today_and_yesterday_puzzles()
+    print("Archived", tayp.today.printDate)
+    print("Archived", tayp.yesterday.printDate)
 
 
 if __name__ == "__main__":

@@ -54,7 +54,7 @@ class TodayAndYesterdayPuzzles(BaseModel):
     yesterday: Puzzle
 
     @classmethod
-    def fetch_today_and_yesterday(cls) -> "TodayAndYesterdayPuzzles":
+    def fetch(cls) -> "TodayAndYesterdayPuzzles":
         """
         Factory method for creating a new TodayAndYesterdayPuzzles instance.
         Fetches the game page from the NYT website, then extracts the puzzle

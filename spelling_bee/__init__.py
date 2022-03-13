@@ -1,3 +1,4 @@
+import spelling_bee.archive as archive
 import spelling_bee.data_model as data_model
 import spelling_bee.dictionary as dictionary
 import spelling_bee.folders as folders

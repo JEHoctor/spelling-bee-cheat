@@ -22,4 +22,4 @@ format:
 	isort spelling_bee/ tests/ scripts/
 
 scrape:
-	(source venv/bin/activate; scrape.py -d puzzle_archive/)
+	(source venv/bin/activate; scrape.py)
