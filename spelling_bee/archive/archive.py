@@ -1,3 +1,4 @@
+import typing as tp
 from pathlib import Path
 
 from spelling_bee.data_model.puzzle import Puzzle
@@ -45,13 +46,16 @@ class Archive:
         with in_path.open("r") as f:
             return Puzzle.parse_raw(f.read())
 
-    def archive(self, puzzle: Puzzle) -> None:
+    def archive(self, puzzle: Puzzle) -> bool:
         """
         Save a Puzzle in the directory as JSON. Choose a file name from the
         publication date of the puzzle.
 
         Args:
             puzzle: puzzle to save
+
+        Returns:
+            bool: True if this puzzle was already in the archive, False otherwise
         """
         out_path = self.path_from_iso8601(puzzle.printDate)
         if not out_path.exists():
@@ -59,17 +63,26 @@ class Archive:
             # value in the puzzle from the previous day.
             with out_path.open("w") as f:
                 f.write(puzzle.json())
+            return False
+        return True
 
-    def today_and_yesterday_puzzles(self) -> TodayAndYesterdayPuzzles:
+    def today_and_yesterday_puzzles(self, *, return_existed: bool = False) -> TodayAndYesterdayPuzzles | tp.Tuple[TodayAndYesterdayPuzzles, bool, bool]:
         """
         Fetch and archive the puzzles from today and yesterday.
 
+        Args:
+            return_existed: if True, return the results of the calls to archive()
+
         Returns:
             TodayAndYesterdayPuzzles: object containing both puzzles
+            bool: if today's puzzle already existed in the archive
+            bool: if yesterday's puzzle already existed in the archive
         """
         tayp = TodayAndYesterdayPuzzles.fetch()
-        self.archive(tayp.today)
-        self.archive(tayp.yesterday)
+        today_existed = self.archive(tayp.today)
+        yesterday_existed = self.archive(tayp.yesterday)
+        if return_existed:
+            return tayp, today_existed, yesterday_existed
         return tayp
 
     def today_puzzle(self) -> Puzzle:

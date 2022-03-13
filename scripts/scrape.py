@@ -3,6 +3,20 @@ import click
 import spelling_bee
 
 
+def report_action_taken(puzzle: spelling_bee.data_model.Puzzle, existed: bool) -> None:
+    """
+    Print summary of action taken with given Puzzle
+
+    Args:
+        puzzle: puzzle just archived
+        existed: return value of the archive operation
+    """
+    if existed:
+        print(f"Puzzle with date {puzzle.printDate} already existed, keeping old version")
+    else:
+        print("Archived", puzzle.printDate)
+
+
 @click.command()
 @click.option("-d", "--archive-dir",
               type=click.Path(exists=True, file_okay=False, writable=True, readable=True),
@@ -19,9 +33,9 @@ def scrape(archive_dir: str):
         archive_dir: folder in which to save the results
     """
     archive = spelling_bee.archive.Archive(archive_dir)
-    tayp = archive.today_and_yesterday_puzzles()
-    print("Archived", tayp.today.printDate)
-    print("Archived", tayp.yesterday.printDate)
+    tayp, today_existed, yesterday_existed = archive.today_and_yesterday_puzzles(return_existed=True)
+    report_action_taken(tayp.today, today_existed)
+    report_action_taken(tayp.yesterday, yesterday_existed)
 
 
 if __name__ == "__main__":
