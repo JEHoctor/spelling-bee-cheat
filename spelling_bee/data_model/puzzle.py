@@ -8,7 +8,7 @@ class Puzzle(BaseModel):
     Representation of the JSON puzzle data used by NYT.
     """
 
-    expiration: int
+    expiration: int = None
     displayWeekday: str
     displayDate: str
     printDate: str
