@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import click
 
 import spelling_bee
