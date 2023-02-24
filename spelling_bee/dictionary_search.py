@@ -29,10 +29,7 @@ def dictionary_search(
     center_letter = center_letter.lower()
 
     words_found = [
-        word
-        for word in dictionary
-        if center_letter in word
-        and set(word) <= letter_set
+        word for word in dictionary if center_letter in word and set(word) <= letter_set
     ]
 
     return words_found

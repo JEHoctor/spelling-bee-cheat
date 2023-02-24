@@ -13,15 +13,20 @@ def report_action_taken(puzzle: spelling_bee.data_model.Puzzle, existed: bool) -
         existed: return value of the archive operation
     """
     if existed:
-        print(f"Puzzle with date {puzzle.printDate} already existed, keeping old version")
+        print(
+            f"Puzzle with date {puzzle.printDate} already existed, keeping old version"
+        )
     else:
         print("Archived", puzzle.printDate)
 
 
 @click.command()
-@click.option("-d", "--archive-dir",
-              type=click.Path(exists=True, file_okay=False, writable=True, readable=True),
-              default=spelling_bee.folders.PUZZLE_ARCHIVE_DIR)
+@click.option(
+    "-d",
+    "--archive-dir",
+    type=click.Path(exists=True, file_okay=False, writable=True, readable=True),
+    default=spelling_bee.folders.PUZZLE_ARCHIVE_DIR,
+)
 def scrape(archive_dir: str):
     """
     Download today's and yesterday's spelling bee puzzles from the NYT website
@@ -34,7 +39,9 @@ def scrape(archive_dir: str):
         archive_dir: folder in which to save the results
     """
     archive = spelling_bee.archive.Archive(archive_dir)
-    tayp, today_existed, yesterday_existed = archive.today_and_yesterday_puzzles(return_existed=True)
+    tayp, today_existed, yesterday_existed = archive.today_and_yesterday_puzzles(
+        return_existed=True
+    )
     report_action_taken(tayp.today, today_existed)
     report_action_taken(tayp.yesterday, yesterday_existed)
 

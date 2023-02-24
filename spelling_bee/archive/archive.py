@@ -8,6 +8,7 @@ from spelling_bee.scrape.scrape import TodayAndYesterdayPuzzles
 
 Pathlike = str | Path
 
+
 class Archive:
     """
     Class to manage an archive of old spelling bee puzzles.
@@ -66,7 +67,9 @@ class Archive:
             return False
         return True
 
-    def today_and_yesterday_puzzles(self, *, return_existed: bool = False) -> TodayAndYesterdayPuzzles | tp.Tuple[TodayAndYesterdayPuzzles, bool, bool]:
+    def today_and_yesterday_puzzles(
+        self, *, return_existed: bool = False
+    ) -> TodayAndYesterdayPuzzles | tp.Tuple[TodayAndYesterdayPuzzles, bool, bool]:
         """
         Fetch and archive the puzzles from today and yesterday.
 

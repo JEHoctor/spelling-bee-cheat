@@ -37,7 +37,8 @@ class CorpusWordsWrapper:
             words_lower = (word.lower() for word in self.corpus.words())
             words_dedup = set(words_lower)
             words_filtered = (
-                word for word in words_dedup
+                word
+                for word in words_dedup
                 if SPELLING_BEE_WORD_RE.fullmatch(word) is not None
             )
             self._words = tuple(sorted(words_filtered))
@@ -53,10 +54,7 @@ CORPUS_NAMES = [
     "webtext",
     "words",
 ]
-CORPORA = {
-    k: CorpusWordsWrapper(getattr(nltk.corpus, k))
-    for k in CORPUS_NAMES
-}
+CORPORA = {k: CorpusWordsWrapper(getattr(nltk.corpus, k)) for k in CORPUS_NAMES}
 
 
 @cache
@@ -68,17 +66,14 @@ def load_default_dictionary() -> tp.Tuple:
     Returns:
         Tuple: tuple of all words
     """
-    return tuple(sorted(
-        set().union(*(
-            corpus.words() for corpus in CORPORA.values()
-        ))
-    ))
+    return tuple(sorted(set().union(*(corpus.words() for corpus in CORPORA.values()))))
 
 
 class DictionaryDataFrameCache:
     """
     Class for caching the results of load_dictionary_dataframe
     """
+
     dictionary_dataframe: pd.DataFrame = None
 
     @classmethod
@@ -86,9 +81,9 @@ class DictionaryDataFrameCache:
         """
         Load word lists from several NLTK corpora and arrange in a dataframe that
         tracks which words are in which corpora.
-    
+
         Returns:
-            pandas.DataFrame: words as indicies, boolean column for each corpus 
+            pandas.DataFrame: words as indicies, boolean column for each corpus
         """
         if cls.dictionary_dataframe is None:
             cls.dictionary_dataframe = cls._load_dictionary_dataframe()

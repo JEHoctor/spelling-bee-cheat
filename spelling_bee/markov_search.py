@@ -21,8 +21,7 @@ ascii_lowercase_list = list(ascii_lowercase)
 
 
 class MarkovSearch:
-    """
-    """
+    """ """
 
     @classmethod
     def _make_word(cls, g, l):
@@ -50,14 +49,15 @@ class MarkovSearch:
         positive_examples = load_default_dictionary()
         negative_examples = cls._make_negative_words(positive_examples, g)
 
-        return pd.concat((
-            pd.DataFrame({"word": positive_examples, "exists": True}),
-            pd.DataFrame({"word": negative_examples, "exists": False}),
-        ))
+        return pd.concat(
+            (
+                pd.DataFrame({"word": positive_examples, "exists": True}),
+                pd.DataFrame({"word": negative_examples, "exists": False}),
+            )
+        )
 
     def __init__(self, random_state=1234):
-        """
-        """
+        """ """
         self.pipeline = make_pipeline(
             TfidfVectorizer(analyzer="char_wb", ngram_range=(1, 3)),
             LogisticRegression(C=0.1),
@@ -67,9 +67,10 @@ class MarkovSearch:
 
         self.pipeline.fit(self.dataset["word"], self.dataset["exists"])
 
-    def markov_search(self, pdat: PuzzleData, batch_size: int = 100_000) -> tp.List[str]:
-        """
-        """
+    def markov_search(
+        self, pdat: PuzzleData, batch_size: int = 100_000
+    ) -> tp.List[str]:
+        """ """
         valid_letters = pdat.valid_letters
         center_letter = pdat.center_letter
         max_length = pd.Series(pdat.answers).str.len().max()
@@ -83,13 +84,15 @@ class MarkovSearch:
         dfuncs = []
         batch_iterable = tqdm(
             list(chunked(words, batch_size)),
-            desc=f"Scoring words (batches of {batch_size})"
+            desc=f"Scoring words (batches of {batch_size})",
         )
         for words_chunk in batch_iterable:
             dfuncs.extend(self.pipeline.decision_function(words_chunk))
 
-        self.words_df = pd.DataFrame({
-            "word": words,
-            "dfunc": dfuncs,
-        })
+        self.words_df = pd.DataFrame(
+            {
+                "word": words,
+                "dfunc": dfuncs,
+            }
+        )
         return self.words_df.sort_values("dfunc", ascending=False)["word"].to_list()
