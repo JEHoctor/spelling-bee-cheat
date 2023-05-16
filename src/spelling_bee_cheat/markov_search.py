@@ -24,11 +24,11 @@ class MarkovSearch:
     """ """
 
     @classmethod
-    def _make_word(cls, g, l):
+    def _make_word(cls, g, l):  # noqa: E741
         return "".join(g.choice(ascii_lowercase_list, size=l))
 
     @classmethod
-    def _make_negative_word(cls, g, l, positive_words):
+    def _make_negative_word(cls, g, l, positive_words):  # noqa: E741
         while True:
             word = cls._make_word(g, l)
             if word not in positive_words:
