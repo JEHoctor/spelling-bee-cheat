@@ -1,1 +1,1 @@
-from spelling_bee_cheat.data_model.puzzle import Puzzle  # noqa F401
+from spelling_bee_cheat.data_model.puzzle import Puzzle
