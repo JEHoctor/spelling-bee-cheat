@@ -35,4 +35,4 @@ scrape = "spelling_bee_cheat.scripts.scrape:scrape"
 "Homepage" = "https://github.com/JEHoctor/spelling-bee-cheat"
 
 [project.optional-dependencies]
-dev = ["black", "isort", "jupyter", "pip-tools", "pytest", "ruff", "seaborn"]
+dev = ["black", "build", "isort", "jupyter", "pip-tools", "pytest", "ruff", "seaborn", "twine"]

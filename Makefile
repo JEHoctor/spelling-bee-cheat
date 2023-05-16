@@ -24,3 +24,9 @@ format:
 scrape:
 	mkdir -p puzzle_archive/
 	(source venv/bin/activate; scrape --archive-dir="puzzle_archive/")
+
+package:
+	(source venv/bin/activate; python3 -m build)
+
+package-upload:
+	(source venv/bin/activate; python3 -m twine upload dist/*)
