@@ -22,4 +22,5 @@ format:
 	isort src/spelling_bee_cheat/ tests/
 
 scrape:
-	(source venv/bin/activate; scrape.py)
+	mkdir -p puzzle_archive/
+	(source venv/bin/activate; scrape --archive-dir="puzzle_archive/")
