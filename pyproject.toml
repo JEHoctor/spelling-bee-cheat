@@ -9,9 +9,8 @@ authors = [
     {name = "James Hoctor", email = "jehoctor@protonmail.com"}
 ]
 description = "Cheat at the NYT Spelling Bee."
-homepage = "https://github.com/JEHoctor/spelling-bee-cheat"
 readme = "README.md"
-license = "MIT"
+license = {file = "LICENSE"}
 packages=["spelling_bee"]
 dependencies = [
     "beautifulsoup4",
@@ -24,10 +23,13 @@ dependencies = [
     "spacy",
     "transformers",
 ]
-scripts=[
-    "scripts/markov.py",
-    "scripts/scrape.py",
-]
+
+[project.scripts]
+markov = "spelling_bee_cheat.scripts.markov:markov"
+scrape = "spelling_bee_cheat.scripts.scrape:scrape"
+
+[project.urls]
+"Homepage" = "https://github.com/JEHoctor/spelling-bee-cheat"
 
 [project.optional-dependencies]
 dev = ["black", "isort", "jupyter", "pip-tools", "pytest", "ruff", "seaborn"]
