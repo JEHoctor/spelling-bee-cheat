@@ -23,6 +23,10 @@ dependencies = [
     "spacy",
     "transformers",
 ]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+]
 
 [project.scripts]
 markov = "spelling_bee_cheat.scripts.markov:markov"
