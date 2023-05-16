@@ -1,1 +1,1 @@
-from spelling_bee.archive.archive import Archive
+from spelling_bee_cheat.archive.archive import Archive

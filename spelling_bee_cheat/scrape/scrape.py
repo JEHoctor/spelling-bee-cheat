@@ -5,7 +5,7 @@ import requests
 from bs4 import BeautifulSoup, Tag
 from pydantic import BaseModel
 
-from spelling_bee.data_model.puzzle import Puzzle
+from spelling_bee_cheat.data_model.puzzle import Puzzle
 
 
 PUZZLE_URL = "https://www.nytimes.com/puzzles/spelling-bee"

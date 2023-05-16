@@ -1,10 +1,10 @@
 #!/usr/bin/python
 import click
 
-import spelling_bee
+import spelling_bee_cheat
 
 
-def report_action_taken(puzzle: spelling_bee.data_model.Puzzle, existed: bool) -> None:
+def report_action_taken(puzzle: spelling_bee_cheat.data_model.Puzzle, existed: bool) -> None:
     """
     Print summary of action taken with given Puzzle
 
@@ -25,7 +25,7 @@ def report_action_taken(puzzle: spelling_bee.data_model.Puzzle, existed: bool) -
     "-d",
     "--archive-dir",
     type=click.Path(exists=True, file_okay=False, writable=True, readable=True),
-    default=spelling_bee.folders.PUZZLE_ARCHIVE_DIR,
+    default=spelling_bee_cheat.folders.PUZZLE_ARCHIVE_DIR,
 )
 def scrape(archive_dir: str):
     """
@@ -38,7 +38,7 @@ def scrape(archive_dir: str):
     Args:
         archive_dir: folder in which to save the results
     """
-    archive = spelling_bee.archive.Archive(archive_dir)
+    archive = spelling_bee_cheat.archive.Archive(archive_dir)
     tayp, today_existed, yesterday_existed = archive.today_and_yesterday_puzzles(
         return_existed=True
     )

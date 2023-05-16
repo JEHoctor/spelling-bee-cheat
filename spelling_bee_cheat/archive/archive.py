@@ -1,9 +1,9 @@
 import typing as tp
 from pathlib import Path
 
-from spelling_bee.data_model.puzzle import Puzzle
-from spelling_bee.folders import PUZZLE_ARCHIVE_DIR
-from spelling_bee.scrape.scrape import TodayAndYesterdayPuzzles
+from spelling_bee_cheat.data_model.puzzle import Puzzle
+from spelling_bee_cheat.folders import PUZZLE_ARCHIVE_DIR
+from spelling_bee_cheat.scrape.scrape import TodayAndYesterdayPuzzles
 
 
 Pathlike = str | Path

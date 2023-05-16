@@ -1,6 +1,6 @@
 from typing import List
 
-from spelling_bee.dictionary import load_default_dictionary
+from spelling_bee_cheat.dictionary import load_default_dictionary
 
 
 def dictionary_search(

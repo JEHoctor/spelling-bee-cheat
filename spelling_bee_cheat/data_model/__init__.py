@@ -1,1 +1,1 @@
-from spelling_bee.data_model.puzzle import Puzzle
+from spelling_bee_cheat.data_model.puzzle import Puzzle

@@ -11,8 +11,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
 
-from spelling_bee.dictionary import load_default_dictionary
-from spelling_bee.nyt_scraping import PuzzleData
+from spelling_bee_cheat.dictionary import load_default_dictionary
+from spelling_bee_cheat.nyt_scraping import PuzzleData
 
 from tqdm import tqdm
 
