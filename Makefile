@@ -12,14 +12,14 @@ clean:
 update: clean init
 
 lint:
-	ruff spelling_bee_cheat/ tests/ scripts/
+	ruff src/spelling_bee_cheat/ tests/
 
 test: lint
 	pytest -vv tests/spelling_bee_cheat
 
 format:
-	black spelling_bee_cheat/ tests/ scripts/
-	isort spelling_bee_cheat/ tests/ scripts/
+	black src/spelling_bee_cheat/ tests/
+	isort src/spelling_bee_cheat/ tests/
 
 scrape:
 	(source venv/bin/activate; scrape.py)
