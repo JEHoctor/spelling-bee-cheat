@@ -3,7 +3,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "spelling-bee"
+name = "spelling-bee-cheat"
 version = "0.0.1"
 authors = [
     {name = "James Hoctor", email = "jehoctor@protonmail.com"}
