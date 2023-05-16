@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# third party libraries
 import click
 
 import spelling_bee_cheat

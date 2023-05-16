@@ -1,23 +1,20 @@
+# standard libraries
 import re
 import typing as tp
 
+# third party libraries
 import requests
 from bs4 import BeautifulSoup, Tag
 from pydantic import BaseModel
 
 from spelling_bee_cheat.data_model.puzzle import Puzzle
 
-
 PUZZLE_URL = "https://www.nytimes.com/puzzles/spelling-bee"
 GAME_DATA_RE = re.compile(r"window.gameData\s*=\s*(?P<data>{.*})")
-WORDS_POINTS_PANGRAMS_RE = re.compile(
-    r"WORDS: (?P<words>\d+), POINTS: (?P<points>\d+), PANGRAMS: (?P<pangrams>\d+)"
-)
+WORDS_POINTS_PANGRAMS_RE = re.compile(r"WORDS: (?P<words>\d+), POINTS: (?P<points>\d+), PANGRAMS: (?P<pangrams>\d+)")
 
 
-def search_tag(
-    tag: Tag, subtag_type: str, regex: re.Pattern, description: str
-) -> tp.Tuple[Tag, re.Match]:
+def search_tag(tag: Tag, subtag_type: str, regex: re.Pattern, description: str) -> tp.Tuple[Tag, re.Match]:
     """
     Search a tag for a subtag containing text matching a regex
 
@@ -39,9 +36,7 @@ def search_tag(
         mo = regex.search(subtag.text)
         if mo is not None:
             return subtag, mo
-    raise RuntimeError(
-        f"Could not find the {subtag_type} tag containing the {description}"
-    )
+    raise RuntimeError(f"Could not find the {subtag_type} tag containing the {description}")
 
 
 class TodayAndYesterdayPuzzles(BaseModel):
@@ -69,9 +64,7 @@ class TodayAndYesterdayPuzzles(BaseModel):
         soup = BeautifulSoup(r.text, "html.parser")
 
         # Extract the JSON game data.
-        _, mo = search_tag(
-            soup, subtag_type="script", regex=GAME_DATA_RE, description="game data"
-        )
+        _, mo = search_tag(soup, subtag_type="script", regex=GAME_DATA_RE, description="game data")
         game_data_json = mo.group("data")
 
         # Construct and return a pydantic representation.

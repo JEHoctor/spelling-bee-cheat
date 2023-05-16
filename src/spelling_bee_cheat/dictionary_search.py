@@ -1,3 +1,4 @@
+# standard libraries
 from typing import List
 
 from spelling_bee_cheat.dictionary import load_default_dictionary
@@ -28,8 +29,6 @@ def dictionary_search(
     letter_set = set(letters.lower())
     center_letter = center_letter.lower()
 
-    words_found = [
-        word for word in dictionary if center_letter in word and set(word) <= letter_set
-    ]
+    words_found = [word for word in dictionary if center_letter in word and set(word) <= letter_set]
 
     return words_found

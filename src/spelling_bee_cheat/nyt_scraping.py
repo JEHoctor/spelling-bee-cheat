@@ -1,9 +1,11 @@
+# standard libraries
 import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Tuple, Union
 
+# third party libraries
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup, Tag
@@ -12,16 +14,12 @@ Pathlike = Union[str, Path]
 
 PUZZLE_URL = "https://www.nytimes.com/puzzles/spelling-bee"
 GAME_DATA_RE = re.compile(r"window.gameData\s*=\s*(?P<data>{.*})")
-WORDS_POINTS_PANGRAMS_RE = re.compile(
-    r"WORDS: (?P<words>\d+), POINTS: (?P<points>\d+), PANGRAMS: (?P<pangrams>\d+)"
-)
+WORDS_POINTS_PANGRAMS_RE = re.compile(r"WORDS: (?P<words>\d+), POINTS: (?P<points>\d+), PANGRAMS: (?P<pangrams>\d+)")
 SIGMA_RE = re.compile(r"Σ")
 TWO_LETTER_GRID_RE = re.compile(r"([A-Z]{2}-\d+\s*)+")
 
 
-def search_tag(
-    tag: Tag, subtag_type: str, regex: re.Pattern, description: str
-) -> Tuple[Tag, re.Match]:
+def search_tag(tag: Tag, subtag_type: str, regex: re.Pattern, description: str) -> Tuple[Tag, re.Match]:
     """
     Search a tag for a subtag containing text matching a regex
 
@@ -43,9 +41,7 @@ def search_tag(
         mo = regex.search(subtag.text)
         if mo is not None:
             return subtag, mo
-    raise RuntimeError(
-        f"Could not find the {subtag_type} tag containing the {description}"
-    )
+    raise RuntimeError(f"Could not find the {subtag_type} tag containing the {description}")
 
 
 def text_with_br(tag: Tag) -> str:
@@ -171,9 +167,7 @@ class HintData:
         words, points, pangrams = map(int, mo.group("words", "points", "pangrams"))
 
         # Extract the word length grid.
-        p, _ = search_tag(
-            soup, subtag_type="p", regex=SIGMA_RE, description="word length grid"
-        )
+        p, _ = search_tag(soup, subtag_type="p", regex=SIGMA_RE, description="word length grid")
         p_text = SIGMA_RE.sub(repl="sum", string=text_with_br(p))
         word_length_grid = cls.build_word_length_grid(p_text)
 
@@ -226,9 +220,7 @@ class PuzzleData:
         soup = BeautifulSoup(r.text, "html.parser")
 
         # Extract the game data.
-        _, mo = search_tag(
-            soup, subtag_type="script", regex=GAME_DATA_RE, description="game data"
-        )
+        _, mo = search_tag(soup, subtag_type="script", regex=GAME_DATA_RE, description="game data")
         game_data_json = mo.group("data")
         game_data = json.loads(game_data_json)
 

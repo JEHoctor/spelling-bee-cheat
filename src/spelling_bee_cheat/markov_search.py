@@ -1,21 +1,19 @@
+# standard libraries
 import typing as tp
 from itertools import product
 from string import ascii_lowercase
 
+# third party libraries
 import numpy as np
 import pandas as pd
-
 from more_itertools import chunked
-
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
+from tqdm import tqdm
 
 from spelling_bee_cheat.dictionary import load_default_dictionary
 from spelling_bee_cheat.nyt_scraping import PuzzleData
-
-from tqdm import tqdm
-
 
 ascii_lowercase_list = list(ascii_lowercase)
 
@@ -67,9 +65,7 @@ class MarkovSearch:
 
         self.pipeline.fit(self.dataset["word"], self.dataset["exists"])
 
-    def markov_search(
-        self, pdat: PuzzleData, batch_size: int = 100_000
-    ) -> tp.List[str]:
+    def markov_search(self, pdat: PuzzleData, batch_size: int = 100_000) -> tp.List[str]:
         """ """
         valid_letters = pdat.valid_letters
         center_letter = pdat.center_letter

@@ -1,10 +1,11 @@
+# standard libraries
 import re
 import typing as tp
 from functools import cache
 
+# third party libraries
 import nltk
 import pandas as pd
-
 
 SPELLING_BEE_WORD_RE = re.compile(r"[a-z]{4,}")
 
@@ -36,11 +37,7 @@ class CorpusWordsWrapper:
         if self._words is None:
             words_lower = (word.lower() for word in self.corpus.words())
             words_dedup = set(words_lower)
-            words_filtered = (
-                word
-                for word in words_dedup
-                if SPELLING_BEE_WORD_RE.fullmatch(word) is not None
-            )
+            words_filtered = (word for word in words_dedup if SPELLING_BEE_WORD_RE.fullmatch(word) is not None)
             self._words = tuple(sorted(words_filtered))
 
         return self._words

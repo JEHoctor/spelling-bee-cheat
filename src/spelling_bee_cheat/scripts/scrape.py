@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# third party libraries
 import click
 
 import spelling_bee_cheat
@@ -13,9 +14,7 @@ def report_action_taken(puzzle: spelling_bee_cheat.data_model.Puzzle, existed: b
         existed: return value of the archive operation
     """
     if existed:
-        print(
-            f"Puzzle with date {puzzle.printDate} already existed, keeping old version"
-        )
+        print(f"Puzzle with date {puzzle.printDate} already existed, keeping old version")
     else:
         print("Archived", puzzle.printDate)
 
@@ -39,9 +38,7 @@ def scrape(archive_dir: str):
         archive_dir: folder in which to save the results
     """
     archive = spelling_bee_cheat.archive.Archive(archive_dir)
-    tayp, today_existed, yesterday_existed = archive.today_and_yesterday_puzzles(
-        return_existed=True
-    )
+    tayp, today_existed, yesterday_existed = archive.today_and_yesterday_puzzles(return_existed=True)
     report_action_taken(tayp.today, today_existed)
     report_action_taken(tayp.yesterday, yesterday_existed)
 
