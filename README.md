@@ -1,4 +1,4 @@
-# spelling-bee 👑🐝📚
+# spelling-bee-cheat 👑🐝📚
 
 This package is for cheating at the [NYT Spelling Bee puzzle](https://www.nytimes.com/puzzles/spelling-bee). The exact feature set hasn't been decided yet. One thing that works well is the system for archiving data about previous days' puzzles. One interesting unfinished feature is the ability to suggest words to guess using an n-gram character model in lieu of a dictionary. There is also some code in here for filtering dictionaries according to the game rules. You can't use this package to play Spelling Bee.
 
