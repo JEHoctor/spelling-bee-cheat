@@ -1,4 +1,4 @@
-from spelling_bee import DictionarySearch, dictionary_search
+from spelling_bee_cheat.dictionary_search import dictionary_search
 
 
 class TestDictionarySearch:
@@ -13,23 +13,12 @@ class TestDictionarySearch:
                 "abch",
                 "bcbc",
             ],
-            min_len=2,
         )
 
         expected_words = [
+            "a",
             "ab",
             "bac",
         ]
 
         assert words == expected_words
-
-    def test_load_default_dictionary(self):
-
-        assert DictionarySearch.dictionary is None
-
-        _ = dictionary_search(
-            letters="abcde",
-            center_letter="a",
-        )
-
-        assert isinstance(DictionarySearch.dictionary, list)
