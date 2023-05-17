@@ -1,4 +1,4 @@
-.PHONY: init clean update lint test format scrape
+.PHONY: init clean update lint test format scrape package package-upload
 
 
 init:
