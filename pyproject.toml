@@ -41,7 +41,7 @@ dev = ["black", "build", "isort", "jupyter", "pip-tools", "pytest", "ruff", "sea
 line-length = 120
 
 [tool.isort]
-py_version=311
+py_version=312
 sections="FUTURE,STDLIB,THIRDPARTY,FIRSTPARTY,LOCALFOLDER"
 import_heading_stdlib="standard libraries"
 import_heading_thirdparty="third party libraries"
